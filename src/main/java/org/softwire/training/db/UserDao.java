@@ -30,7 +30,7 @@ public class UserDao {
 
     public Optional<User> getUser(String username) {
         try (Handle handle = jdbi.open()) {
-            return handle.createQuery("SELECT username, fullname, password FROM users WHERE username = :username")
+            return handle.createQuery("SELECT username, fullname, hashed_password FROM users WHERE username = :username")
                     .bind("username", username)
                     .mapToBean(User.class)
                     .findFirst();
@@ -39,7 +39,7 @@ public class UserDao {
 
     public void addUser(User user) {
         try (Handle handle = jdbi.open()) {
-            handle.createCall("INSERT INTO users (username, fullname, password) VALUES (:username, :fullname, :password)")
+            handle.createCall("INSERT INTO users (username, fullname, hashed_password) VALUES (:username, :fullname, :hashedPassword)")
                     .bindBean(user)
                     .invoke();
         }

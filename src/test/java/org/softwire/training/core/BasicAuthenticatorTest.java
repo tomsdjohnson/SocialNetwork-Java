@@ -18,16 +18,22 @@ public class BasicAuthenticatorTest {
 
     private BasicAuthenticator basicAuthenticator;
     private UserDao userDao;
+    private PasswordHasher passwordHasher;
 
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
-    private static final User USER = new User("username", "fullname", PASSWORD);
+    private static final String HASHED_PASSWORD = "hashed password";
+    private static final User USER = new User("username", "fullname", HASHED_PASSWORD);
 
     @BeforeEach
     public void beforeEach() {
         userDao = mock(UserDao.class);
+        passwordHasher = mock(PasswordHasher.class);
+
         when(userDao.getUser(USERNAME)).thenReturn(Optional.of(USER));
-        basicAuthenticator = new BasicAuthenticator(userDao);
+        when(passwordHasher.verify(PASSWORD, HASHED_PASSWORD)).thenReturn(true);
+
+        basicAuthenticator = new BasicAuthenticator(userDao, passwordHasher);
     }
 
     @Test
@@ -50,8 +56,10 @@ public class BasicAuthenticatorTest {
 
     @Test
     public void handleIncorrectPassword() {
+        when(passwordHasher.verify(PASSWORD, HASHED_PASSWORD)).thenReturn(false);
+
         Optional<UserPrincipal> userPrincipal = basicAuthenticator.authenticate(
-                new BasicCredentials(USERNAME, "incorrectpassword"));
+                new BasicCredentials(USERNAME, PASSWORD));
 
         assertThat(userPrincipal, equalTo(Optional.empty()));
     }

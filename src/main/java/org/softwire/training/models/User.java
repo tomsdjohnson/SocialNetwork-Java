@@ -10,23 +10,23 @@ import com.google.common.base.Objects;
  */
 public class User extends UserSummary {
 
-    private String password;
+    private String hashedPassword;
 
     public User() {
         super();
     }
 
-    public User(String username, String fullname, String password) {
+    public User(String username, String fullname, String hashedPassword) {
         super(username, fullname);
-        this.password = password;
+        this.hashedPassword = hashedPassword;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     /**
@@ -47,11 +47,11 @@ public class User extends UserSummary {
         if (!(o instanceof User)) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equal(password, user.password);
+        return Objects.equal(hashedPassword, user.hashedPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(super.hashCode(), password);
+        return Objects.hashCode(super.hashCode(), hashedPassword);
     }
 }

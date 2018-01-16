@@ -15,9 +15,11 @@ public class BasicAuthenticator implements Authenticator<BasicCredentials, UserP
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicAuthenticator.class);
 
     private final UserDao userDao;
+    private final PasswordHasher passwordHasher;
 
-    public BasicAuthenticator(UserDao userDao) {
+    public BasicAuthenticator(UserDao userDao, PasswordHasher passwordHasher) {
         this.userDao = userDao;
+        this.passwordHasher = passwordHasher;
     }
 
     @Override
@@ -31,13 +33,13 @@ public class BasicAuthenticator implements Authenticator<BasicCredentials, UserP
         }
 
         User user = userOption.get();
-        if (user.getPassword().equals(credentials.getPassword())) {
+        if (!passwordHasher.verify(credentials.getPassword(),user.getHashedPassword())) {
+            LOGGER.debug("Failed to authenticate user, incorrect password.  Username: {}",credentials.getUsername());
+            return Optional.empty();
+        }
             UserPrincipal userPrincipal = new UserPrincipal(user);
             LOGGER.debug("Successfully authenticated user: {}", userPrincipal);
             return Optional.of(userPrincipal);
-        }
 
-        LOGGER.debug("Failed to authenticate user, incorrect password.  Username: {}", credentials.getUsername());
-        return Optional.empty();
     }
 }

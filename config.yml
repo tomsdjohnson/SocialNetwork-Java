@@ -2,6 +2,7 @@ logging:
   level: INFO
   loggers:
     org.softwire.training: DEBUG
+    com.muquit.libsodiumjna: WARN
 
 database:
   driverClass: com.mysql.jdbc.Driver
