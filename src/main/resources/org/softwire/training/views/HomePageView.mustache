@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{{> Head }}
+<body>
+{{> Titlebar }}
+
+<div class="ui main text container">
+    <h1 class="ui header">MyFace</h1>
+
+    The brand new social network.
+
+    <h4 class="ui horizontal header">Users</h4>
+
+    <div class="ui list divided">
+        {{#users}}
+            <div class="item">
+                <img class="ui avatar image" src="assets/images/ic_face_black_24px.svg">
+                <div class="content">
+                    <a class="header" href=/wall/{{name}}>{{name}}</a>
+                </div>
+            </div>
+        {{/users}}
+    </div>
+</div>
+
+</body>
+</html>
