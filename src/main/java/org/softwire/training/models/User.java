@@ -2,30 +2,31 @@ package org.softwire.training.models;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 /**
- * A user of the social network.
+ * A user of the social network, this object represents a full user - including password details.
+ *
+ * This is used when handling users directly. For other uses, use UserSummary.
  */
-public class User {
+public class User extends UserSummary {
 
-    /**
-     * The user name uniquely identifies a user
-     */
-    private String name;
+    private String password;
 
-    public User() {}
-
-    public User(String name) {
-        this.name = name;
+    public User() {
+        super();
     }
 
-    public String getName() {
-        return name;
+    public User(String username, String fullname, String password) {
+        super(username, fullname);
+        this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
@@ -33,22 +34,24 @@ public class User {
      */
 
     @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("username", getUsername())
+                .add("fullname", getFullname())
+                .toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
+        if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equal(name, user.name);
+        return Objects.equal(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(name);
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("name", name)
-                .toString();
+        return Objects.hashCode(super.hashCode(), password);
     }
 }

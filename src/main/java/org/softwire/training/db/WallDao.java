@@ -3,7 +3,6 @@ package org.softwire.training.db;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.softwire.training.models.SocialEvent;
-import org.softwire.training.models.User;
 
 import java.util.List;
 
@@ -20,29 +19,25 @@ public class WallDao {
         this.jdbi = jdbi;
     }
 
-    public List<SocialEvent> readWall(User user) {
+    public List<SocialEvent> readWall(String user) {
         try (Handle handle = jdbi.open()) {
-            return handle.createQuery("SELECT author AS name, content FROM social_events WHERE user = :user")
-                    .bind("user", user.getName())
+            return handle.createQuery(
+                       "SELECT users.username, users.fullname, social_events.content " +
+                        "FROM social_events " +
+                        "JOIN users " +
+                        "ON social_events.author = users.username " +
+                        "WHERE social_events.user = :username")
+                    .bind("username", user)
                     .mapToBean(SocialEvent.class)
                     .list();
         }
     }
 
-    public List<User> getAllUsers() {
+    public void writeOnWall(String user, SocialEvent socialEvent) {
         try (Handle handle = jdbi.open()) {
-            return handle.createQuery("SELECT DISTINCT user AS name FROM social_events")
-                    .mapToBean(User.class)
-                    .list();
-        }
-    }
-
-    public void writeOnWall(User user, SocialEvent socialEvent) {
-        try (Handle handle = jdbi.open()) {
-            handle.createCall("INSERT INTO social_events (user, author, content) VALUES (:user, :author, :content)")
-                    .bind("author", socialEvent.getAuthor().getName())
-                    .bind("user", user.getName())
-                    .bind("content", socialEvent.getContent())
+            handle.createCall("INSERT INTO social_events (user, author, content) VALUES (:username, :author.username, :content)")
+                    .bindBean(socialEvent)
+                    .bind("username", user)
                     .invoke();
         }
     }

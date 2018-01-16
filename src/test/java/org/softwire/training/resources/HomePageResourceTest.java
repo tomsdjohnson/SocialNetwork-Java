@@ -2,9 +2,9 @@ package org.softwire.training.resources;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.softwire.training.db.WallDao;
+import org.softwire.training.db.UserDao;
 import org.softwire.training.models.UserPrincipal;
-import org.softwire.training.models.User;
+import org.softwire.training.models.UserSummary;
 import org.softwire.training.views.HomePageView;
 
 import java.util.Arrays;
@@ -16,16 +16,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class HomePageResourceTest {
-    private static final User LOGGED_IN_USER = new User("jerry");
+    private static final UserSummary LOGGED_IN_USER = new UserSummary("jerry", "Jerry Smith");
     private static final UserPrincipal USER_PRINCIPAL = new UserPrincipal(LOGGED_IN_USER);
-    private static final List<User> USERS = Arrays.asList(new User("rick"), new User("morty"));
+    private static final List<UserSummary> USERS = Arrays.asList(
+            new UserSummary("rick", "Rick Sanchez"), new UserSummary("morty", "Morty Smith"));
 
-    private final WallDao wallDao = mock(WallDao.class);
-    private final HomePageResource resource = new HomePageResource(wallDao);
+    private final UserDao userDao = mock(UserDao.class);
+    private final HomePageResource resource = new HomePageResource(userDao);
 
     @BeforeEach
     public void beforeAll() {
-        when(wallDao.getAllUsers()).thenReturn(USERS);
+        when(userDao.getUserSummaries()).thenReturn(USERS);
     }
 
     @Test

@@ -5,23 +5,26 @@
 {{> Titlebar }}
 
 <div class="ui main text container">
-    <h1 class="ui header">{{subject.name}}'s wall</h1>
+    <h1 class="ui header">{{subject.username}}'s wall</h1>
 
     <div class="ui list divided">
         {{#socialEvents}}
             <div class="item">
                 <img class="ui avatar image" src="/assets/images/ic_note_black_24px.svg">
                 <div class="content">
-                    <a class="header" href=/wall/{{author.name}}>{{author.name}}</a>
+                    <a class="header" href=/wall/{{author.username}}>{{author.username}}</a>
                     <div class="description">{{content}}</div>
                 </div>
             </div>
         {{/socialEvents}}
     </div>
 
-    <form name="form" action="/wall/{{subject.name}}/write" method="post">
+    <form name="form" action="/wall/{{subject.username}}/write" method="post">
         <div class="ui action input">
-            <input name="message" type="text" placeholder="Hey, what's up?"/>
+            <input name="message"
+                   type="text"
+                   placeholder="Hey, what's up?"
+                   required="required"/>
             <input class="ui button" type="submit" value="Post"/>
         </div>
     </form>

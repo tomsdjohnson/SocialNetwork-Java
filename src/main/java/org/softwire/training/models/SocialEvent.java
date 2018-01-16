@@ -12,7 +12,7 @@ public class SocialEvent {
     /**
      * The author of the Social Event
      */
-    private User author;
+    private UserSummary author;
 
     /**
      * The text content of the Event
@@ -21,17 +21,17 @@ public class SocialEvent {
 
     public SocialEvent() {}
 
-    public SocialEvent(User author, String content) {
+    public SocialEvent(UserSummary author, String content) {
         this.author = author;
         this.content = content;
     }
 
     @Nested
-    public User getAuthor() {
+    public UserSummary getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserSummary author) {
         this.author = author;
     }
 

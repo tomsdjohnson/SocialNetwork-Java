@@ -1,26 +1,26 @@
 package org.softwire.training.views;
 
 import io.dropwizard.views.View;
-import org.softwire.training.models.User;
+import org.softwire.training.models.UserSummary;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class HomePageView extends View {
-    private User loggedInUser;
-    private final List<User> users;
+    private UserSummary loggedInUser;
+    private final List<UserSummary> users;
 
-    public HomePageView(User user, List<User> users) {
+    public HomePageView(UserSummary user, List<UserSummary> users) {
         super("HomePageView.mustache", StandardCharsets.UTF_8);
         this.loggedInUser = user;
         this.users = users;
     }
 
-    public List<User> getUsers() {
+    public List<UserSummary> getUsers() {
         return users;
     }
 
-    public User getLoggedInUser() {
+    public UserSummary getLoggedInUser() {
         return loggedInUser;
     }
 }

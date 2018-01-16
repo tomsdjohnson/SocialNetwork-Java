@@ -12,19 +12,19 @@ import java.security.Principal;
  */
 public class UserPrincipal implements Principal {
 
-    private final User user;
+    private final UserSummary user;
 
-    public UserPrincipal(User user) {
+    public UserPrincipal(UserSummary user) {
         this.user = user;
     }
 
-    public User getUser() {
+    public UserSummary getUser() {
         return user;
     }
 
     @Override
     public String getName() {
-        return getUser().getName();
+        return getUser().getUsername();
     }
 
     /**
