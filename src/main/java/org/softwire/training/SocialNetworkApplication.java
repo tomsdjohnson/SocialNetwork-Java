@@ -13,6 +13,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.softwire.training.core.BasicAuthenticator;
+import org.softwire.training.core.PasswordHasher;
 import org.softwire.training.db.UserDAO;
 import org.softwire.training.db.WallDAO;
 import org.softwire.training.models.UserPrincipal;
@@ -51,16 +52,18 @@ public class SocialNetworkApplication extends Application<SocialNetworkConfigura
         final WallDAO wallDAO = new WallDAO(jdbi);
         final UserDAO userDAO = new UserDAO(jdbi);
 
+        final PasswordHasher passwordHasher = new PasswordHasher();
+
         // Register Resources
         environment.jersey().register(new HomePageResource(userDAO));
         environment.jersey().register(new WallResource(wallDAO, userDAO));
         environment.jersey().register(new LandingPageResource());
-        environment.jersey().register(new NewUserResource(userDAO));
+        environment.jersey().register(new NewUserResource(userDAO, passwordHasher));
 
         // HTTP Basic Auth setup
         environment.jersey().register(new AuthDynamicFeature(
                 new BasicCredentialAuthFilter.Builder<UserPrincipal>()
-                        .setAuthenticator(new BasicAuthenticator(userDAO))
+                        .setAuthenticator(new BasicAuthenticator(userDAO, passwordHasher))
                         .setRealm("Super Secret Social Network")
                         .buildAuthFilter()));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserPrincipal.class));

@@ -26,7 +26,7 @@ public class WallResourceTest {
     private static final UserPrincipal USER_PRINCIPAL = new UserPrincipal(LOGGED_IN_USER);
 
     private static final String SUBJECT_USERNAME = "FrankReynolds";
-    private static final User SUBJECT = new User(SUBJECT_USERNAME, "Frank Reynolds", "password");
+    private static final User SUBJECT = new User(SUBJECT_USERNAME, "Frank Reynolds", "hashedpassword");
 
     private WallDAO wallDAO;
     private UserDAO userDAO;

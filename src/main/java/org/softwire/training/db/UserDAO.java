@@ -24,17 +24,18 @@ public class UserDAO {
 
     public Optional<User> getUser(String username) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT username, fullname, password FROM users WHERE username = :username")
-                        .bind("username", username)
-                        .mapToBean(User.class)
-                        .findFirst());
+            handle.createQuery("SELECT username, fullname, hashedpassword " +
+                                    "FROM users WHERE username = :username")
+                    .bind("username", username)
+                    .mapToBean(User.class)
+                    .findFirst());
     }
 
     public void addUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createCall("INSERT INTO users (username, fullname, password) " +
-                        "VALUES (:username, :fullname, :password)")
-                        .bindBean(user)
-                        .invoke());
+            handle.createCall("INSERT INTO users (username, fullname, hashedpassword) " +
+                                   "VALUES (:username, :fullname, :hashedPassword)")
+                    .bindBean(user)
+                    .invoke());
     }
 }

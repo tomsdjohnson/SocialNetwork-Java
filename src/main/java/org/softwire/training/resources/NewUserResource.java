@@ -1,9 +1,11 @@
 package org.softwire.training.resources;
 
+import com.muquit.libsodiumjna.exceptions.SodiumLibraryException;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.softwire.training.core.PasswordHasher;
 import org.softwire.training.db.UserDAO;
 import org.softwire.training.models.User;
 import org.softwire.training.views.NewUserView;
@@ -20,9 +22,11 @@ public class NewUserResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(WallResource.class);
 
     private final UserDAO userDAO;
+    private final PasswordHasher passwordHasher;
 
-    public NewUserResource(UserDAO userDAO) {
+    public NewUserResource(UserDAO userDAO, PasswordHasher passwordHasher) {
         this.userDAO = userDAO;
+        this.passwordHasher = passwordHasher;
     }
 
     @GET
@@ -40,7 +44,15 @@ public class NewUserResource {
             @FormParam("password") @NotEmpty String password) {
 
         LOGGER.info("Create new user. User: {} Fullname: {}");
-        User user = new User(username, fullname, password);
+
+        User user;
+        try {
+            user = new User(username, fullname, passwordHasher.hash(password));
+        } catch (SodiumLibraryException e) {
+            LOGGER.error("libsodium error while hashing password", e);
+            throw new InternalServerErrorException();
+        }
+
         try {
             userDAO.addUser(user);
         } catch (UnableToExecuteStatementException e) {
@@ -49,6 +61,7 @@ public class NewUserResource {
             }
             throw e;
         }
+
         return Response.seeOther(URI.create("/home")).build();
     }
 }
