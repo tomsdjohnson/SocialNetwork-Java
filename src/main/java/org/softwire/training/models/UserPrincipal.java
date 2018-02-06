@@ -7,26 +7,26 @@ import java.security.Principal;
 
 public class UserPrincipal implements Principal {
 
-    private User user;
+    private String user;
 
     public UserPrincipal() {
     }
 
-    public UserPrincipal(User user) {
+    public UserPrincipal(String user) {
         this.user = user;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
     @Override
     public String getName() {
-        return getUser().getName();
+        return getUser();
     }
 
     /**

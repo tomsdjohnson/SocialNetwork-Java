@@ -2,16 +2,17 @@ package org.softwire.training.models;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import org.jdbi.v3.core.mapper.Nested;
 
 public class SocialEvent {
-    private User author;
+    private String author;
     private String content;
 
     public SocialEvent()
     {
     }
 
-    public SocialEvent(User author, String content) {
+    public SocialEvent(String author, String content) {
         this.author = author;
         this.content = content;
     }
@@ -20,11 +21,11 @@ public class SocialEvent {
         return content;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author)
+    public void setAuthor(String author)
     {
         this.author = author;
     }

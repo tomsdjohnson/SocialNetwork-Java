@@ -3,7 +3,6 @@ package org.softwire.training.core;
 import io.dropwizard.auth.basic.BasicCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.softwire.training.models.User;
 import org.softwire.training.models.UserPrincipal;
 
 import java.util.Optional;
@@ -26,7 +25,7 @@ public class BasicAuthenticatorTest {
         Optional<UserPrincipal> userPrinciple = basicAuthenticator.authenticate(
                 new BasicCredentials(username, "secret"));
 
-        assertThat(userPrinciple, equalTo(Optional.of(new UserPrincipal(new User(username)))));
+        assertThat(userPrinciple, equalTo(Optional.of(new UserPrincipal(username))));
     }
 
     @Test

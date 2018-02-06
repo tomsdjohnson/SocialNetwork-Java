@@ -6,6 +6,6 @@ import java.nio.charset.StandardCharsets;
 
 public class LandingPageView extends View {
     public LandingPageView() {
-        super("LandingPageView.mustache", StandardCharsets.UTF_8);
+        super("LandingPageView.ftl", StandardCharsets.UTF_8);
     }
 }

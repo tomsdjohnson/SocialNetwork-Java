@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.softwire.training.db.WallDAO;
 import org.softwire.training.models.UserPrincipal;
 import org.softwire.training.models.SocialEvent;
-import org.softwire.training.models.User;
 import org.softwire.training.views.WallView;
 
 import javax.ws.rs.*;
@@ -32,9 +31,7 @@ public class WallResource {
     @Produces(MediaType.TEXT_HTML)
     public WallView get(
             @Auth UserPrincipal userPrincipal,
-            @PathParam("subjectName")  @NotEmpty String subjectName) {
-        User subject = new User(subjectName);
-
+            @PathParam("subjectName")  @NotEmpty String subject) {
         LOGGER.info("Get wall. User: {} Subject: {}", userPrincipal, subject);
 
         List<SocialEvent> socialEvents = wallDAO.readWall(subject);
@@ -46,15 +43,14 @@ public class WallResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response post(
             @Auth UserPrincipal userPrincipal,
-            @PathParam("subjectName") @NotEmpty String subjectName,
+            @PathParam("subjectName") @NotEmpty String subject,
             @FormParam("message") @NotEmpty String message) {
-        User subject = new User(subjectName);
 
         LOGGER.info("Post to Wall. User: {} Subject: {} Message: {}",
                 userPrincipal, subject, message);
 
         SocialEvent socialEvent = new SocialEvent(userPrincipal.getUser(), message);
         wallDAO.writeOnWall(subject, socialEvent);
-        return Response.seeOther(URI.create("/wall/" + subjectName)).build();
+        return Response.seeOther(URI.create("/wall/" + subject)).build();
     }
 }

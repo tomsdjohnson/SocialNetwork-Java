@@ -2,7 +2,6 @@ package org.softwire.training.views;
 
 import io.dropwizard.views.View;
 import org.softwire.training.models.SocialEvent;
-import org.softwire.training.models.User;
 
 import java.util.List;
 
@@ -10,14 +9,14 @@ public class WallView extends View {
 
     private final List<SocialEvent> socialEvents;
 
-    private final User subject;
-    private final User loggedInUser;
+    private final String subject;
+    private final String loggedInUser;
 
     public WallView(
             List<SocialEvent> socialEvents,
-            User subject,
-            User loggedInUser) {
-        super("WallView.mustache");
+            String subject,
+            String loggedInUser) {
+        super("WallView.ftl");
         this.socialEvents = socialEvents;
         this.subject = subject;
         this.loggedInUser = loggedInUser;
@@ -27,11 +26,11 @@ public class WallView extends View {
         return socialEvents;
     }
 
-    public User getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public User getLoggedInUser() {
+    public String getLoggedInUser() {
         return loggedInUser;
     }
 }

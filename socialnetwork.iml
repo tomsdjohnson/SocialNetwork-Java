@@ -97,9 +97,9 @@
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-access:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: net.sourceforge.argparse4j:argparse4j:0.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain.setuid:jetty-setuid-java:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views-mustache:1.2.2" level="project" />
+    <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views-freemarker:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-views:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.github.spullara.mustache.java:compiler:0.9.5" level="project" />
+    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.27-incubating" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-auth:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard:dropwizard-assets:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.arteam:dropwizard-jdbi3:1.2.1" level="project" />

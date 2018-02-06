@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{{> Head }}
+<#include "Head.ftl">
 <body>
 
 <div class="ui main text container">
