@@ -59,7 +59,6 @@
             <version>${dropwizard.version}</version>
         </dependency>
 
-
         <!-- Below dependency bundles an old version of jdbi3-core -->
         <dependency>
             <groupId>com.github.arteam</groupId>

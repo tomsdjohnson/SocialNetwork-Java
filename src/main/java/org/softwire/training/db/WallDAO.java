@@ -15,25 +15,22 @@ public class WallDAO {
 
     public List<SocialEvent> readWall(String user) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT author, content FROM walls WHERE user = :user")
-                        .bind("user", user)
+                handle.createQuery("SELECT users.username, users.fullname, walls.content " +
+                        "FROM walls " +
+                        "JOIN users " +
+                        "ON walls.author = users.username " +
+                        "WHERE walls.username = :username")
+                        .bind("username", user)
                         .mapToBean(SocialEvent.class)
                         .list());
     }
 
-    public List<String> getAllUsers() {
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT DISTINCT user FROM walls")
-                        .mapTo(String.class)
-                        .list());
-
-    }
-
     public void writeOnWall(String user, SocialEvent socialEvent) {
         jdbi.useHandle(handle ->
-                handle.createCall("INSERT INTO walls (user, author, content) VALUES (:user, :author, :content)")
-                        .bindBean(socialEvent)
-                        .bind("user", user)
-                        .invoke());
+            handle.createCall("INSERT INTO walls (username, author, content) " +
+                        "VALUES (:username, :author.username, :content)")
+                    .bindBean(socialEvent)
+                    .bind("username", user)
+                    .invoke());
     }
 }

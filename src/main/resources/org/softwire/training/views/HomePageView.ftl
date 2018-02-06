@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="users" type="java.util.List<String>" -->
+<#-- @ftlvariable name="users" type="java.util.List<org.softwire.training.models.UserSummary>" -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
             <div class="item">
                 <img class="ui avatar image" src="assets/images/ic_face_black_24px.svg">
                 <div class="content">
-                    <a class="header" href=/wall/${user}>${user}</a>
+                    <a class="header" href=/wall/${user.username}>${user.fullname}</a>
                 </div>
             </div>
         </#list>

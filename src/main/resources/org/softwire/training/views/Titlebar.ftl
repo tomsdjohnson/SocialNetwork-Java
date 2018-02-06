@@ -1,13 +1,13 @@
-<#-- @ftlvariable name="loggedInUser" type="String" -->
+<#-- @ftlvariable name="loggedInUser" type="org.softwire.training.models.UserSummary" -->
 
 <div class="ui fixed inverted menu">
     <div class="ui container">
         <a class="header item" href="/">
             MyFace
         </a>
-        <a class="header item right" href="/wall/${loggedInUser}">
+        <a class="header item right" href="/wall/${loggedInUser.username}">
             <img class="ui avatar image" src="/assets/images/ic_face_black_24px.svg">
-            ${loggedInUser}
+            ${loggedInUser.fullname}
         </a>
     </div>
 </div>

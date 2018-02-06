@@ -13,6 +13,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.softwire.training.core.BasicAuthenticator;
+import org.softwire.training.db.UserDAO;
 import org.softwire.training.db.WallDAO;
 import org.softwire.training.models.UserPrincipal;
 import org.softwire.training.resources.HomePageResource;
@@ -47,18 +48,19 @@ public class SocialNetworkApplication extends Application<SocialNetworkConfigura
         // Database setup
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "mysql");
-        final WallDAO dao = new WallDAO(jdbi);
+        final WallDAO wallDAO = new WallDAO(jdbi);
+        final UserDAO userDAO = new UserDAO(jdbi);
 
         // Register Resources
-        environment.jersey().register(new HomePageResource(dao));
-        environment.jersey().register(new WallResource(dao));
+        environment.jersey().register(new HomePageResource(userDAO));
+        environment.jersey().register(new WallResource(wallDAO, userDAO));
         environment.jersey().register(new LandingPageResource());
-        environment.jersey().register(new NewUserResource());
+        environment.jersey().register(new NewUserResource(userDAO));
 
         // HTTP Basic Auth setup
         environment.jersey().register(new AuthDynamicFeature(
                 new BasicCredentialAuthFilter.Builder<UserPrincipal>()
-                        .setAuthenticator(new BasicAuthenticator())
+                        .setAuthenticator(new BasicAuthenticator(userDAO))
                         .setRealm("Super Secret Social Network")
                         .buildAuthFilter()));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserPrincipal.class));

@@ -5,7 +5,18 @@ import io.dropwizard.views.View;
 import java.nio.charset.StandardCharsets;
 
 public class NewUserView extends View {
-    public NewUserView() {
+    private String error;
+
+    public NewUserView(String error) {
         super("NewUserView.ftl", StandardCharsets.UTF_8);
+        this.error = error;
+    }
+
+    public NewUserView() {
+        this(null);
+    }
+
+    public String getError() {
+        return error;
     }
 }
