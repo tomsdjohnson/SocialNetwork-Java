@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 public class HomePageResourceTest {
     private static final User LOGGED_IN_USER = new User("jerry");
-    private static final UserPrincipal USER_PRINCIPLE = new UserPrincipal(LOGGED_IN_USER);
+    private static final UserPrincipal USER_PRINCIPAL = new UserPrincipal(LOGGED_IN_USER);
     private static final List<User> USERS = Arrays.asList(new User("rick"), new User("morty"));
 
     private final WallDao wallDao = mock(WallDao.class);
@@ -30,13 +30,14 @@ public class HomePageResourceTest {
 
     @Test
     public void displaysAllKnownUsers() {
-        HomePageView homePageView = resource.get(USER_PRINCIPLE);
+        HomePageView homePageView = resource.get(USER_PRINCIPAL);
 
         assertThat(homePageView.getUsers(), equalTo(USERS));
     }
 
-    @Test void displaysLoggedInUser() {
-        HomePageView homePageView = resource.get(USER_PRINCIPLE);
+    @Test
+    public void displaysLoggedInUser() {
+        HomePageView homePageView = resource.get(USER_PRINCIPAL);
 
         assertThat(homePageView.getLoggedInUser(), equalTo(LOGGED_IN_USER));
     }

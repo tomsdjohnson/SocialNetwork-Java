@@ -23,18 +23,18 @@ public class BasicAuthenticatorTest {
     @Test
     public void handleCorrectPassword() {
         String username = "username";
-        Optional<UserPrincipal> userPrinciple = basicAuthenticator.authenticate(
+        Optional<UserPrincipal> userPrincipal = basicAuthenticator.authenticate(
                 new BasicCredentials(username, "secret"));
 
-        assertThat(userPrinciple, equalTo(Optional.of(new UserPrincipal(new User(username)))));
+        assertThat(userPrincipal, equalTo(Optional.of(new UserPrincipal(new User(username)))));
     }
 
     @Test
     public void handleIncorrectPassword() {
         String username = "username";
-        Optional<UserPrincipal> userPrinciple = basicAuthenticator.authenticate(
+        Optional<UserPrincipal> userPrincipal = basicAuthenticator.authenticate(
                 new BasicCredentials(username, "incorrectpassword"));
 
-        assertThat(userPrinciple, equalTo(Optional.empty()));
+        assertThat(userPrincipal, equalTo(Optional.empty()));
     }
 }

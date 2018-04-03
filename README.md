@@ -1,4 +1,4 @@
-# "MyFace" Social Network Exersize
+# "MyFace" Social Network Exercise
 
 # Setup
 
