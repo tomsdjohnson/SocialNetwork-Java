@@ -10,6 +10,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 
+/**
+ * Resource for creating new users
+ */
 @Path("/signup")
 public class NewUserResource {
 
@@ -28,6 +31,7 @@ public class NewUserResource {
             @FormParam("password") @NotEmpty String password,
             @FormParam("fullname") @NotEmpty String fullname) {
 
+        // TODO: Implement this!
         LOGGER.error("This functionality is missing!  username: {} password: {} fullname: {}",
                 username, password, fullname);
 

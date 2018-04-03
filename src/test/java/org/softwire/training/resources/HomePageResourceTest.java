@@ -2,8 +2,8 @@ package org.softwire.training.resources;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.softwire.training.db.WallDAO;
-import org.softwire.training.models.UserPrinciple;
+import org.softwire.training.db.WallDao;
+import org.softwire.training.models.UserPrincipal;
 import org.softwire.training.models.User;
 import org.softwire.training.views.HomePageView;
 
@@ -17,15 +17,15 @@ import static org.mockito.Mockito.when;
 
 public class HomePageResourceTest {
     private static final User LOGGED_IN_USER = new User("jerry");
-    private static final UserPrinciple USER_PRINCIPLE = new UserPrinciple(LOGGED_IN_USER);
+    private static final UserPrincipal USER_PRINCIPLE = new UserPrincipal(LOGGED_IN_USER);
     private static final List<User> USERS = Arrays.asList(new User("rick"), new User("morty"));
 
-    private final WallDAO wallDAO = mock(WallDAO.class);
-    private final HomePageResource resource = new HomePageResource(wallDAO);
+    private final WallDao wallDao = mock(WallDao.class);
+    private final HomePageResource resource = new HomePageResource(wallDao);
 
     @BeforeEach
     public void beforeAll() {
-        when(wallDAO.getAllUsers()).thenReturn(USERS);
+        when(wallDao.getAllUsers()).thenReturn(USERS);
     }
 
     @Test

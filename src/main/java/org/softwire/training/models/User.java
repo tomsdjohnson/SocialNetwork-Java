@@ -3,7 +3,14 @@ package org.softwire.training.models;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+/**
+ * A user of the social network.
+ */
 public class User {
+
+    /**
+     * The user name uniquely identifies a user
+     */
     private final String name;
 
     public User(String name) {
@@ -15,7 +22,7 @@ public class User {
     }
 
     /**
-     * Below methods were automatically generated using intelliJ and guava.
+     * Below methods were automatically generated using IntelliJ and Guava.
      */
 
     @Override

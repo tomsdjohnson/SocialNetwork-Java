@@ -1,8 +1,8 @@
 package org.softwire.training.resources;
 
 import org.junit.jupiter.api.Test;
-import org.softwire.training.db.WallDAO;
-import org.softwire.training.models.UserPrinciple;
+import org.softwire.training.db.WallDao;
+import org.softwire.training.models.UserPrincipal;
 import org.softwire.training.models.SocialEvent;
 import org.softwire.training.models.User;
 import org.softwire.training.views.WallView;
@@ -17,17 +17,17 @@ import static org.mockito.Mockito.*;
 
 public class WallResourceTest {
     private static final User LOGGED_IN_USER = new User("CharlieKelly");
-    private static final UserPrinciple USER_PRINCIPLE = new UserPrinciple(LOGGED_IN_USER);
+    private static final UserPrincipal USER_PRINCIPLE = new UserPrincipal(LOGGED_IN_USER);
     private static final User USER = new User("FrankReynolds");
 
-    private final WallDAO wallDAO = mock(WallDAO.class);
-    private final WallResource resource = new WallResource(wallDAO);
+    private final WallDao wallDao = mock(WallDao.class);
+    private final WallResource resource = new WallResource(wallDao);
 
     @Test
     public void getRequestDisplaysWallContents() {
         List<SocialEvent> events = Collections.singletonList(
                 new SocialEvent(new User("RonaldMcDonald"), "What's up?"));
-        when(wallDAO.readWall(USER)).thenReturn(events);
+        when(wallDao.readWall(USER)).thenReturn(events);
 
         WallView wallView = resource.get(USER_PRINCIPLE, USER.getName());
 
@@ -50,7 +50,7 @@ public class WallResourceTest {
         String content = "It's always sunny";
         resource.post(USER_PRINCIPLE, USER.getName(), content);
 
-        verify(wallDAO, times(1))
+        verify(wallDao, times(1))
                 .writeOnWall(USER, new SocialEvent(LOGGED_IN_USER, content));
     }
 

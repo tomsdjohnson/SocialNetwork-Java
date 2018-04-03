@@ -4,9 +4,9 @@ logging:
     org.softwire.training: DEBUG
 
 database:
-  driverClass: com.mysql.cj.jdbc.Driver
-  user: root
-  password: mysql
+  driverClass: com.mysql.jdbc.Driver
+  user: myface
+  password: myface
 
   # verifyServerCertificate=false to avoid log spam
   url: jdbc:mysql://localhost/socialnetwork?verifyServerCertificate=false&useSSL=true

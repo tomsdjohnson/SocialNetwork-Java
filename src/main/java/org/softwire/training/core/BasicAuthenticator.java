@@ -5,22 +5,25 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.softwire.training.models.User;
-import org.softwire.training.models.UserPrinciple;
+import org.softwire.training.models.UserPrincipal;
 
 import java.util.Optional;
 
-public class BasicAuthenticator implements Authenticator<BasicCredentials, UserPrinciple> {
+public class BasicAuthenticator implements Authenticator<BasicCredentials, UserPrincipal> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BasicAuthenticator.class);
 
     @Override
-    public Optional<UserPrinciple> authenticate(BasicCredentials credentials) {
+    public Optional<UserPrincipal> authenticate(BasicCredentials credentials) {
+
+        // TODO: Implement real authentication!
         if ("secret".equals(credentials.getPassword())) {
-            UserPrinciple user = new UserPrinciple(new User(credentials.getUsername()));
+            UserPrincipal user = new UserPrincipal(new User(credentials.getUsername()));
             LOGGER.debug("Successfully authenticated user: {}", user);
             return Optional.of(user);
+        } else {
+            LOGGER.debug("Failed to authenticate user, incorrect password.  Username: {}", credentials.getUsername());
+            return Optional.empty();
         }
-        LOGGER.debug("Failed to authenticate user, incorrect password.  Username: {}", credentials.getUsername());
-        return Optional.empty();
     }
 }

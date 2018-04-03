@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS `walls`;
-CREATE TABLE `walls` (
+DROP TABLE IF EXISTS `social_events`;
+CREATE TABLE `social_events` (
+  `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `user` varchar(20) NOT NULL,
   `author` varchar(20) NOT NULL,
-  `content` text NOT NULL,
-  KEY `user` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `content` text NOT NULL
+);
 
-INSERT INTO `walls` (`author`, `user`, `content`) VALUES
-    ('rick','morty','Hey Morty it\'s rick'),
-    ('rick','morty','What\'s up?'),
-    ('morty','rick','Help!');
+INSERT INTO `social_events` (`author`, `user`, `content`) VALUES
+  ('Joe','Gareth','Hey Gareth it\'s Joe'),
+  ('Joe','Gareth','What\'s up?'),
+  ('Gareth','Joe','Help!');

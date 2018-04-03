@@ -1,20 +1,17 @@
 package org.softwire.training.resources;
 
-import io.dropwizard.auth.Auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.softwire.training.db.WallDAO;
-import org.softwire.training.models.UserPrinciple;
-import org.softwire.training.models.User;
-import org.softwire.training.views.HomePageView;
 import org.softwire.training.views.LandingPageView;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
+/**
+ * The landing page - i.e. the first page you see when loading the site
+ */
 @Path("/")
 @Produces(MediaType.TEXT_HTML)
 public class LandingPageResource {
@@ -28,5 +25,3 @@ public class LandingPageResource {
         return new LandingPageView();
     }
 }
-
-

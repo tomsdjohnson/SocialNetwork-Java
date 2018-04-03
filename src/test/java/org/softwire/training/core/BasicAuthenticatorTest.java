@@ -4,7 +4,7 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.softwire.training.models.User;
-import org.softwire.training.models.UserPrinciple;
+import org.softwire.training.models.UserPrincipal;
 
 import java.util.Optional;
 
@@ -23,16 +23,16 @@ public class BasicAuthenticatorTest {
     @Test
     public void handleCorrectPassword() {
         String username = "username";
-        Optional<UserPrinciple> userPrinciple = basicAuthenticator.authenticate(
+        Optional<UserPrincipal> userPrinciple = basicAuthenticator.authenticate(
                 new BasicCredentials(username, "secret"));
 
-        assertThat(userPrinciple, equalTo(Optional.of(new UserPrinciple(new User(username)))));
+        assertThat(userPrinciple, equalTo(Optional.of(new UserPrincipal(new User(username)))));
     }
 
     @Test
     public void handleIncorrectPassword() {
         String username = "username";
-        Optional<UserPrinciple> userPrinciple = basicAuthenticator.authenticate(
+        Optional<UserPrincipal> userPrinciple = basicAuthenticator.authenticate(
                 new BasicCredentials(username, "incorrectpassword"));
 
         assertThat(userPrinciple, equalTo(Optional.empty()));

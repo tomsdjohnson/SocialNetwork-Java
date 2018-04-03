@@ -3,8 +3,19 @@ package org.softwire.training.models;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+/**
+ * A Social Event represents a single item on a wall - i.e. a post
+ */
 public class SocialEvent {
+
+    /**
+     * The author of the Social Event
+     */
     private final User author;
+
+    /**
+     * The text content of the Event
+     */
     private final String content;
 
     public SocialEvent(User author, String content) {
@@ -21,7 +32,7 @@ public class SocialEvent {
     }
 
     /**
-     * Below methods were automatically generated using intelliJ and guava.
+     * Below methods were automatically generated using IntelliJ and Guava.
      */
 
     @Override

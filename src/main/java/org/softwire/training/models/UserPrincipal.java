@@ -5,11 +5,16 @@ import com.google.common.base.Objects;
 
 import java.security.Principal;
 
-public class UserPrinciple implements Principal {
+/**
+ * In authentication, the 'Principal' is an entity which can be authenticated.
+ *
+ * In our case this is just a user, we use a separate class to distinguish users in an authentication context.
+ */
+public class UserPrincipal implements Principal {
 
     private final User user;
 
-    public UserPrinciple(User user) {
+    public UserPrincipal(User user) {
         this.user = user;
     }
 
@@ -30,7 +35,7 @@ public class UserPrinciple implements Principal {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserPrinciple that = (UserPrinciple) o;
+        UserPrincipal that = (UserPrincipal) o;
         return Objects.equal(user, that.user);
     }
 
