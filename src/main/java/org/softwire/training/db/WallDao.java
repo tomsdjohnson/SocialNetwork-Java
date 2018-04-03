@@ -2,7 +2,7 @@ package org.softwire.training.db;
 
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
-import org.softwire.training.models.SocialEvent;
+import org.softwire.training.models.events.SocialEvent;
 
 import java.util.List;
 
@@ -22,22 +22,24 @@ public class WallDao {
     public List<SocialEvent> readWall(String user) {
         try (Handle handle = jdbi.open()) {
             return handle.createQuery(
-                       "SELECT users.username, users.fullname, social_events.content " +
+                       "SELECT users.username, users.fullname, social_events.event_type, social_events.content " +
                         "FROM social_events " +
                         "JOIN users " +
                         "ON social_events.author = users.username " +
                         "WHERE social_events.user = :username")
                     .bind("username", user)
-                    .mapToBean(SocialEvent.class)
+                    .map(new SocialEventMapper())
                     .list();
         }
     }
 
     public void writeOnWall(String user, SocialEvent socialEvent) {
         try (Handle handle = jdbi.open()) {
-            handle.createCall("INSERT INTO social_events (user, author, content) VALUES (:username, :author.username, :content)")
+            handle.createCall("INSERT INTO social_events (user, author, event_type, content) " +
+                                        "VALUES (:username, :author.username, :event_type, :content)")
                     .bindBean(socialEvent)
                     .bind("username", user)
+                    .bind("event_type", EventType.getEventType(socialEvent).toString())
                     .invoke();
         }
     }

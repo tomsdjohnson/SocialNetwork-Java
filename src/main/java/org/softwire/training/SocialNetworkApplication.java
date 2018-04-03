@@ -16,7 +16,7 @@ import org.softwire.training.core.BasicAuthenticator;
 import org.softwire.training.core.PasswordHasher;
 import org.softwire.training.db.UserDao;
 import org.softwire.training.db.WallDao;
-import org.softwire.training.models.UserPrincipal;
+import org.softwire.training.models.user.UserPrincipal;
 import org.softwire.training.resources.HomePageResource;
 import org.softwire.training.resources.LandingPageResource;
 import org.softwire.training.resources.NewUserResource;

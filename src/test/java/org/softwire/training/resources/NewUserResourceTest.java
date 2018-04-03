@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.softwire.training.core.PasswordHasher;
 import org.softwire.training.db.UserDao;
-import org.softwire.training.models.User;
+import org.softwire.training.models.user.User;
 import org.softwire.training.views.NewUserView;
 
 import javax.ws.rs.WebApplicationException;

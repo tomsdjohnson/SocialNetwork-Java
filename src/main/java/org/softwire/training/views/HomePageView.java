@@ -1,7 +1,7 @@
 package org.softwire.training.views;
 
 import io.dropwizard.views.View;
-import org.softwire.training.models.UserSummary;
+import org.softwire.training.models.user.UserSummary;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;

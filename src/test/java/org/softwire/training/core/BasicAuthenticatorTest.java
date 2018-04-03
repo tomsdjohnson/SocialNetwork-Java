@@ -4,8 +4,8 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.softwire.training.db.UserDao;
-import org.softwire.training.models.User;
-import org.softwire.training.models.UserPrincipal;
+import org.softwire.training.models.user.User;
+import org.softwire.training.models.user.UserPrincipal;
 
 import java.util.Optional;
 

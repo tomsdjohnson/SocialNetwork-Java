@@ -5,12 +5,14 @@
 {{> Titlebar }}
 
 <div class="ui main text container">
-    <h1 class="ui header">{{subject.username}}'s wall</h1>
+    <h1 class="ui header">
+        {{subject.username}}'s wall
+    </h1>
 
     <div class="ui list divided">
         {{#socialEvents}}
             <div class="item">
-                <img class="ui avatar image" src="/assets/images/ic_note_black_24px.svg">
+                <img class="ui avatar image" src="/assets/images/{{iconPath}}">
                 <div class="content">
                     <a class="header" href=/wall/{{author.username}}>{{author.username}}</a>
                     <div class="description">{{content}}</div>
@@ -19,16 +21,47 @@
         {{/socialEvents}}
     </div>
 
-    <form name="form" action="/wall/{{subject.username}}/write" method="post">
-        <div class="ui action input">
-            <input name="message"
-                   type="text"
-                   placeholder="Hey, what's up?"
-                   required="required"/>
-            <input class="ui button" type="submit" value="Post"/>
-        </div>
-    </form>
+    <div class="ui horizontal divider">
+        Reactions
+    </div>
 
+    <div class="ui list horizontal">
+        <form class="ui item" name="form" action="/wall/{{subject.username}}/wave" method="post">
+            <input class="ui action button icon"
+                   type="image"
+                   title="Wave"
+                   src="/assets/images/ic_pan_tool_black_24px.svg">
+        </form>
+
+        <form class="ui item" name="form" action="/wall/{{subject.username}}/frown" method="post">
+            <input class="ui action button icon"
+                   type="image"
+                   title="Frown"
+                   src="/assets/images/ic_thumb_down_black_24px.svg">
+        </form>
+
+        <form class="ui item" name="form" action="/wall/{{subject.username}}/like" method="post">
+            <input class="ui action button icon"
+                   type="image"
+                   title="Like"
+                   src="/assets/images/ic_favorite_black_24px.svg">
+        </form>
+    </div>
+
+    <div class="ui horizontal divider">
+        Post to {{subject.username}}'s wall
+    </div>
+
+    <div>
+        <form class="ui form" name="form" action="/wall/{{subject.username}}/write" method="post">
+            <div class="wide field">
+                <input class="ui" name="message" type="text" placeholder="Hey, what's up?" required="required"/>
+            </div>
+            <div class="field">
+                <input class="ui button" type="submit" value="Post"/>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>

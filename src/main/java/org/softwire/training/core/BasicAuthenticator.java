@@ -5,8 +5,8 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.softwire.training.db.UserDao;
-import org.softwire.training.models.User;
-import org.softwire.training.models.UserPrincipal;
+import org.softwire.training.models.user.User;
+import org.softwire.training.models.user.UserPrincipal;
 
 import java.util.Optional;
 
@@ -37,9 +37,9 @@ public class BasicAuthenticator implements Authenticator<BasicCredentials, UserP
             LOGGER.debug("Failed to authenticate user, incorrect password.  Username: {}",credentials.getUsername());
             return Optional.empty();
         }
-            UserPrincipal userPrincipal = new UserPrincipal(user);
-            LOGGER.debug("Successfully authenticated user: {}", userPrincipal);
-            return Optional.of(userPrincipal);
 
+        UserPrincipal userPrincipal = new UserPrincipal(user);
+        LOGGER.debug("Successfully authenticated user: {}", userPrincipal);
+        return Optional.of(userPrincipal);
     }
 }

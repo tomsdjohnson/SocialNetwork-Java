@@ -1,8 +1,8 @@
 package org.softwire.training.views;
 
 import io.dropwizard.views.View;
-import org.softwire.training.models.SocialEvent;
-import org.softwire.training.models.UserSummary;
+import org.softwire.training.models.events.SocialEvent;
+import org.softwire.training.models.user.UserSummary;
 
 import java.util.List;
 

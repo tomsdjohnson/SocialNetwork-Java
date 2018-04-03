@@ -1,4 +1,4 @@
-package org.softwire.training.models;
+package org.softwire.training.models.user;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

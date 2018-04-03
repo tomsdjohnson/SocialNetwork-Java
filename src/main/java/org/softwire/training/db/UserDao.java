@@ -2,8 +2,8 @@ package org.softwire.training.db;
 
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
-import org.softwire.training.models.User;
-import org.softwire.training.models.UserSummary;
+import org.softwire.training.models.user.User;
+import org.softwire.training.models.user.UserSummary;
 
 import java.util.List;
 import java.util.Optional;

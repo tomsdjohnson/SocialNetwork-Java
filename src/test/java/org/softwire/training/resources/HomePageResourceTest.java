@@ -3,8 +3,8 @@ package org.softwire.training.resources;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.softwire.training.db.UserDao;
-import org.softwire.training.models.UserPrincipal;
-import org.softwire.training.models.UserSummary;
+import org.softwire.training.models.user.UserPrincipal;
+import org.softwire.training.models.user.UserSummary;
 import org.softwire.training.views.HomePageView;
 
 import java.util.Arrays;

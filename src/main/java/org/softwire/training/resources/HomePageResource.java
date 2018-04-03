@@ -4,8 +4,8 @@ import io.dropwizard.auth.Auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.softwire.training.db.UserDao;
-import org.softwire.training.models.UserPrincipal;
-import org.softwire.training.models.UserSummary;
+import org.softwire.training.models.user.UserPrincipal;
+import org.softwire.training.models.user.UserSummary;
 import org.softwire.training.views.HomePageView;
 
 import javax.ws.rs.GET;
