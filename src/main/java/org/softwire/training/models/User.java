@@ -2,6 +2,7 @@ package org.softwire.training.models;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 /**
  * A user of the social network.
@@ -11,7 +12,9 @@ public class User {
     /**
      * The user name uniquely identifies a user
      */
-    private final String name;
+    private String name;
+
+    public User() {}
 
     public User(String name) {
         this.name = name;
@@ -19,6 +22,10 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

@@ -2,6 +2,7 @@ package org.softwire.training.models;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import org.jdbi.v3.core.mapper.Nested;
 
 /**
  * A Social Event represents a single item on a wall - i.e. a post
@@ -11,24 +12,35 @@ public class SocialEvent {
     /**
      * The author of the Social Event
      */
-    private final User author;
+    private User author;
 
     /**
      * The text content of the Event
      */
-    private final String content;
+    private String content;
+
+    public SocialEvent() {}
 
     public SocialEvent(User author, String content) {
         this.author = author;
         this.content = content;
     }
 
+    @Nested
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public String getContent() {
         return content;
     }
 
-    public User getAuthor() {
-        return author;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
