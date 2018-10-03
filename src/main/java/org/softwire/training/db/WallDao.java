@@ -31,7 +31,7 @@ public class WallDao {
 
     public List<User> getAllUsers() {
         try (Handle handle = jdbi.open()) {
-            return handle.createQuery("SELECT DISTINCT user AS name FROM social_events")
+            return handle.createQuery("SELECT * FROM users")
                     .mapToBean(User.class)
                     .list();
         }
