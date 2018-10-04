@@ -16,10 +16,7 @@ import org.softwire.training.core.BasicAuthenticator;
 import org.softwire.training.db.UserDao;
 import org.softwire.training.db.WallDao;
 import org.softwire.training.models.UserPrincipal;
-import org.softwire.training.resources.HomePageResource;
-import org.softwire.training.resources.LandingPageResource;
-import org.softwire.training.resources.NewUserResource;
-import org.softwire.training.resources.WallResource;
+import org.softwire.training.resources.*;
 
 /**
  * Main MyFace application
@@ -65,11 +62,12 @@ public class SocialNetworkApplication extends Application<SocialNetworkConfigura
         environment.jersey().register(new WallResource(wallDao));
         environment.jersey().register(new LandingPageResource());
         environment.jersey().register(new NewUserResource(userDao));
+        environment.jersey().register(new LoginResource(userDao));
 
         // HTTP Basic Auth setup
         environment.jersey().register(new AuthDynamicFeature(
                 new BasicCredentialAuthFilter.Builder<UserPrincipal>()
-                        .setAuthenticator(new BasicAuthenticator())
+                        .setAuthenticator(new BasicAuthenticator(userDao))
                         .setRealm("Super Secret Social Network")
                         .buildAuthFilter()));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(UserPrincipal.class));

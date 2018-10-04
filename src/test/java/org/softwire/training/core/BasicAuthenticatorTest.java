@@ -3,6 +3,7 @@ package org.softwire.training.core;
 import io.dropwizard.auth.basic.BasicCredentials;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.softwire.training.db.UserDao;
 import org.softwire.training.models.User;
 import org.softwire.training.models.UserPrincipal;
 
@@ -17,7 +18,7 @@ public class BasicAuthenticatorTest {
 
     @BeforeEach
     public void beforeEach() {
-        basicAuthenticator = new BasicAuthenticator();
+        basicAuthenticator = new BasicAuthenticator(UserDao);
     }
 
     @Test

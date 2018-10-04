@@ -45,7 +45,7 @@ public class NewUserResource {
         LOGGER.error("This functionality is missing!  username: {} password: {} fullname: {}",
                 username, password, fullname);
 
-        return Response.seeOther(URI.create("/home")).build();
+        return Response.seeOther(URI.create("/")).build();
     }
 
 }

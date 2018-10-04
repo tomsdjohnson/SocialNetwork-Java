@@ -23,7 +23,7 @@ public class WallDao {
     public List<SocialEvent> readWall(User user) {
         try (Handle handle = jdbi.open()) {
             return handle.createQuery("SELECT author AS name, content FROM social_events WHERE user = :user")
-                    .bind("user", user.getUsername())
+                    .bind("user", getUserId(user))
                     .mapToBean(SocialEvent.class)
                     .list();
         }
@@ -40,10 +40,26 @@ public class WallDao {
     public void writeOnWall(User user, SocialEvent socialEvent) {
         try (Handle handle = jdbi.open()) {
             handle.createCall("INSERT INTO social_events (user, author, content) VALUES (:user, :author, :content)")
-                    .bind("author", socialEvent.getAuthor().getUsername())
-                    .bind("user", user.getUsername())
+                    .bind("author", getUserId(socialEvent.getAuthor()) )
+                    .bind("user", getUserId(user))
                     .bind("content", socialEvent.getContent())
                     .invoke();
         }
     }
+
+    public int getUserId(User user){
+
+        int i;
+
+        try (Handle handle = jdbi.open()) {
+
+            i = handle.createQuery("SELECT id FROM users WHERE username = :username")
+                    .bind("username", user.getUsername())
+                    .mapTo(Integer.class)
+                    .findOnly();
+
+        }
+        return i;
+    }
+
 }
