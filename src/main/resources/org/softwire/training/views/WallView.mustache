@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {{> Head }}
+<style>
+    #left{
+        float: right;
+    }
+</style>
 <body>
 {{> Titlebar }}
 
 <div class="ui main text container">
     <h1 class="ui header">{{subject.username}}'s wall</h1>
-
-    <div class="ui list divided">
+    <div class="content">
         {{#socialEvents}}
-            <div class="item">
-                <img class="ui avatar image" src="/assets/images/ic_note_black_24px.svg">
-                <div class="content">
-                    <a class="header" href=/wall/{{author.username}}>{{author.username}}</a>
-                    <div class="description">{{content}}</div>
+            <div class="ui segments">
+                <div class="ui segment">
+                    <img class="ui avatar image" src="/assets/images/ic_note_black_24px.svg">
+                    <div>
+                        <a class="header" href=/wall/{{loggedInUser.username}}><h2>{{loggedInUser.username}}</h2></a>
+                        <div class="description">{{content}}</div>
+                    </div>
+                </div>
+                <div class="ui secondary segment">
+                    <button class="circular ui icon button">
+                        <i class="thumbs up icon"></i> 0
+                    </button>
+                    <button class="circular ui icon button">
+                        <i class="thumbs down icon"></i> 0
+                    </button>
+                    <a class="nav-link" href="/wall/{{loggedInUser.username}}/delete/{{id}}">
+                        <button class="circular ui icon button" id = left>
+                            <i class="close link icon"></i>
+                        </button>
+                    </a>
+
                 </div>
             </div>
         {{/socialEvents}}
     </div>
-
     <form name="form" action="/wall/{{subject.username}}/write" method="post">
         <div class="ui action input">
             <input name="message" type="text" placeholder="Hey, what's up?"/>

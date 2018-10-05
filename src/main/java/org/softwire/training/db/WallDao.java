@@ -39,6 +39,8 @@ public class WallDao {
 
     public void writeOnWall(User user, SocialEvent socialEvent) {
         try (Handle handle = jdbi.open()) {
+            System.out.printf("%s\n%s", user, socialEvent);
+
             handle.createCall("INSERT INTO social_events (user, author, content) VALUES (:user, :author, :content)")
                     .bind("author", getUserId(socialEvent.getAuthor()) )
                     .bind("user", getUserId(user))

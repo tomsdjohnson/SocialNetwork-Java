@@ -9,6 +9,9 @@ import org.jdbi.v3.core.mapper.Nested;
  */
 public class SocialEvent {
 
+
+    private int id;
+
     /**
      * The author of the Social Event
      */
@@ -67,5 +70,15 @@ public class SocialEvent {
                 .add("author", author)
                 .add("content", content)
                 .toString();
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public void setId(int id) {
+
+        this.id = id;
     }
 }

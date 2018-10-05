@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class BasicAuthenticatorTest {
 
@@ -18,7 +19,8 @@ public class BasicAuthenticatorTest {
 
     @BeforeEach
     public void beforeEach() {
-        basicAuthenticator = new BasicAuthenticator(UserDao);
+        UserDao userDao = mock(UserDao.class);
+        basicAuthenticator = new BasicAuthenticator(userDao);
     }
 
     @Test

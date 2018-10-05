@@ -1,16 +1,11 @@
 package org.softwire.training.db;
 
-
-import com.sun.corba.se.spi.servicecontext.UEInfoServiceContext;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.softwire.training.models.User;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * The Wall DAO (Data Access Object) provides an interface for interacting with Social Events in the database.
@@ -28,7 +23,7 @@ public class UserDao {
             jdbi.withHandle(handle ->
                     handle.createUpdate("INSERT INTO socialnetwork.users (username, fullName, password) VALUES (:username, :fullName, :password)")
                             .bind("username", username)
-                            .bind("password", password)
+                            .bind("password", hashString(password,"SHA-256"))
                             .bind("fullName", fullname)
                             .execute()
             );
@@ -56,8 +51,6 @@ public class UserDao {
         }
     }
 
-
-
     public String hashString(String target, String alg){
 
         MessageDigest messageDigest = null;
@@ -73,8 +66,5 @@ public class UserDao {
 
     }
 
-
-
 }
-
 

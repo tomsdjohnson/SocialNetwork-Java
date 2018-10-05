@@ -60,4 +60,5 @@ public class WallResource {
         wallDao.writeOnWall(subject, socialEvent);
         return Response.seeOther(URI.create("/wall/" + subjectName)).build();
     }
+
 }

@@ -75,6 +75,8 @@ public class User {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("name", name)
+                .add("id", id)
+                .add("username", username)
                 .toString();
     }
 

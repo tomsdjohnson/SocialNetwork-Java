@@ -62,7 +62,6 @@ public class SocialNetworkApplication extends Application<SocialNetworkConfigura
         environment.jersey().register(new WallResource(wallDao));
         environment.jersey().register(new LandingPageResource());
         environment.jersey().register(new NewUserResource(userDao));
-        environment.jersey().register(new LoginResource(userDao));
 
         // HTTP Basic Auth setup
         environment.jersey().register(new AuthDynamicFeature(
